@@ -1,48 +1,40 @@
-# Population Dynamics README
+# Project One: Population Dynamics Plan
 
 >*Skills displayed here include:* **Stochastic differential equations, Monte Carlo simulation, nonlinear dynamical systems, numerical methods, uncertainty quantification, sensitivity analysis, correlated stochastic processes, first-passage/threshold analysis, parameter sweeps, model validation, scientific Python**
-
 >I've decided to redo my coursework projects but expand them to cover any future work sections.
-
 >I got As on all of these but they are a bit simplisitic and if I want them in my portfolio I need to show off more of my skills. 
-
->This is Project Number One: Population Dynamics. 
-I'm combining the first 2 projects from AMS 333: Mathematical Biology to make this as they flow together. 
-
+>This is Project One: Population Dynamics. I'm combining the first 2 projects from AMS 333: Mathematical Biology to make this as they flow together. 
 >The original project reports are availble as well in the /originals directory. 
 
-investigates how increasingly realistic biological assumptions change predicted population behavior, progressing from simple deterministic growth laws to nonlinear discrete maps, coupled predator–prey systems, and stochastic population models. The central question is:
+We'll investigate how increasingly realistic biological assumptions change predicted population behavior, progressing from simple deterministic growth laws to nonlinear discrete maps, coupled predator–prey systems, and stochastic population models. My question is:
 
-> **How do density dependence, species interactions, nonlinear functional responses, and environmental stochasticity change population stability, recovery, and extinction risk?**
+> *How do density dependence, species interactions, nonlinear functional responses, and environmental stochasticity change population stability, recovery, and extinction risk?*
 
-The project combines analytical mathematics with numerical simulation. Deterministic models establish the underlying dynamics and provide benchmarks for numerical methods; parameter and stability analyses identify qualitatively different regimes; stochastic extensions then examine how uncertainty and environmental variability alter predictions that appear straightforward in deterministic models.
+The project combines analytical mathematics with numerical simulation. Deterministic models show the underlying dynamics and provide benchmarks for numerical methods while parameter and stability analyses identify qualitatively different regimes. Stochastic extensions then examine how uncertainty and environmental variability change predictions that appear straightforward in deterministic models.
 
 ## 1. Single-Population Deterministic Growth — Yeast
 
-The first case study revisits exponential and logistic yeast growth to establish the distinction between unrestricted growth and density-dependent population regulation.
+The first case study revisits exponential and logistic yeast growth to show the difference between unrestricted growth and density-dependent population regulation.
+
+> $$N = N_0e^{rt}$$
 
 The exponential model
 
-$$
-\frac{dN}{dt}=rN
-$$
+$$\frac{dN}{dt}=rN$$
 
-provides a baseline in which per-capita growth remains constant. The logistic model
+provides a baseline in which per-capita growth remains constant while the logistic model
 
-$$
-\frac{dN}{dt}
-=
-
-rN\left(1-\frac{N}{K}\right)
-$$
+$$\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)$$
 
 introduces a finite carrying capacity and allows growth to slow as population density increases.
+
+Here is a breakdown of the plan:
 
 ### Analysis
 
 * Derive the analytical exponential and logistic solutions.
 * Relate doubling time $$\tau$$ to the continuous growth rate (r).
-* Identify and interpret the logistic equilibria (N^*=0) and (N^*=K).
+* Identify and interpret the logistic equilibria (N*=0) and (N*=K).
 * Determine their stability.
 * Calculate times required to reach biologically meaningful thresholds such as (0.90K), (0.95K), and (0.99K).
 * Revisit the original physical-volume calculation as a sanity check illustrating why unrestricted exponential growth rapidly becomes biologically impossible.
@@ -68,9 +60,9 @@ Questions include:
 * How frequently does the population fail to reach a specified threshold within a fixed time window?
 * How does multiplicative environmental noise differ from simple parameter uncertainty?
 
-Monte Carlo simulations will be used to estimate recovery-time distributions and threshold probabilities.
+Monte Carlo simulations will also be used to estimate recovery-time distributions and threshold probabilities.
 
-### Figures
+### Figures 
 
 1. Exponential versus logistic yeast growth.
 2. Logistic growth with (0.90K), (0.95K), and (0.99K) thresholds indicated.
@@ -85,12 +77,7 @@ Monte Carlo simulations will be used to estimate recovery-time distributions and
 
 The second case study examines population recovery in a species with discrete generations using the Hassell map,
 
-$$
-N_{n+1}
-=
-
-\frac{RN_n}{(1+aN_n)^b}.
-$$
+$$N_{n+1}=\frac{RN_n}{(1+aN_n)^b}$$
 
 Unlike the continuous yeast models, the Hassell model directly maps one generation into the next. It therefore provides an introduction to discrete nonlinear dynamical systems, fixed points, and discrete stability.
 
@@ -99,21 +86,19 @@ Unlike the continuous yeast models, the Hassell model directly maps one generati
 * Re-derive the reproductive multiplier from the biological assumptions of the original cicada problem.
 * Carefully distinguish the discrete reproductive multiplier (R) from the continuous growth rate (r).
 * Revisit the relationship between (R), (a), (b), and the intended carrying capacity (K).
-* Derive the nonzero fixed point (N^*).
+* Derive the nonzero fixed point (N*).
 * Determine local stability using
 
-$$
-|f'(N^*)|<1.
-$$
+$$|f'(N*)|<1$$
 
 * Interpret the biological roles of (a) and (b).
 * Compare recovery trajectories from different founding populations.
 * Calculate the minimum founding population required to reach a specified fraction of carrying capacity within a specified number of generations.
-* Explore how changing (R) and (b) alters long-run behavior, including undercompensatory and overcompensatory density dependence.
+* Explore how changing (R) and (b) changes long-run behavior, including undercompensatory and overcompensatory density dependence.
 
 ### Numerical analysis
 
-Because the Hassell model is already discrete, no ODE solver is required. Numerical work instead focuses on iteration and long-run behavior.
+Because the Hassell model is already discrete, we don't need an ODE solver here. I'll focus instead on iteration and long-run behavior.
 
 * Verify fixed points numerically against analytical predictions.
 * Test whether populations initialized slightly above and below a fixed point converge toward or diverge from it as predicted by the derivative criterion.
@@ -135,12 +120,12 @@ Questions include:
 * How does stochastic risk change across different deterministic Hassell regimes?
 * Are small founding populations disproportionately vulnerable to stochastic failure?
 
-A demographic-stochasticity extension may also be considered for small populations, where randomness in individual survival and reproduction cannot reasonably be approximated solely by continuous environmental noise.
+I might also consider a demographic-stochasticity extension for small populations, where randomness in individual survival and reproduction can't be approximated (reasonably at least) solely by continuous environmental noise.
 
 ### Figures
 
 1. Deterministic Hassell population trajectory through generations.
-2. Hassell map (N_{n+1}=f(N_n)) together with (N_{n+1}=N_n) and the population trajectory.
+2. Hassell map $$N_{n+1}=f(N_n)$$ together with $$N_{n+1}=N_n$$ and the population trajectory.
 3. Recovery trajectories for several founding populations.
 4. Parameter sweep showing long-run behavior as (R) and/or (b) changes.
 5. Fixed-point stability demonstration using nearby initial conditions.
@@ -152,42 +137,23 @@ A demographic-stochasticity extension may also be considered for small populatio
 
 ## 3. Coupled Nonlinear Dynamics — Hare–Lynx Predator–Prey Models
 
-The third case study moves from single-population regulation to interacting populations. Classical Lotka–Volterra dynamics provide the baseline:
+The third case study moves from single-population regulation to interacting populations. Classical Lotka–Volterra dynamics state:
 
-$$
-\frac{dU}{dt}
-=
+$$\frac{dU}{dt}=\alpha U-\gamma UV,$$
 
-\alpha U-\gamma UV,
-$$
+$$\frac{dV}{dt}=\epsilon\gamma UV-\beta V$$
 
-$$
-\frac{dV}{dt}
-=
-
-\epsilon\gamma UV-\beta V.
-$$
-
-The model is then progressively modified to relax two unrealistic assumptions: unlimited prey growth and indefinitely increasing predator consumption.
+I'll then modify the model to relax two unrealistic assumptions: unlimited prey growth and indefinitely increasing predator consumption.
 
 The first modification introduces logistic prey growth,
 
-$$
-\alpha U
-\quad\longrightarrow\quad
-\alpha U\left(1-\frac{U}{K}\right),
-$$
+$$\alpha U\quad\longrightarrow\quad\alpha U\left(1-\frac{U}{K}\right),$$
 
 while the second introduces a saturating Holling Type II functional response,
 
-$$
-f(U)
-=
+$$f(U)=\frac{\gamma U}{1+\gamma\kappa U}$$
 
-\frac{\gamma U}{1+\gamma\kappa U}.
-$$
-
-The final deterministic model combines density-limited prey growth with saturating predation.
+The final deterministic model will combine density-limited prey growth with saturating predation.
 
 ### Analysis
 
@@ -207,7 +173,7 @@ For each model variant:
 The deterministic sequence will be:
 
 $$
-\text{Lotka--Volterra}
+\text{Lotka-Volterra}
 \rightarrow
 \text{logistic prey}
 \rightarrow
@@ -238,7 +204,7 @@ Introduce environmental stochasticity into the coupled system and examine whethe
 
 Questions include:
 
-* How does environmental noise alter cycle period and amplitude?
+* How does environmental noise change cycle period and amplitude?
 * How variable does predator lag become?
 * How does noise affect minimum prey and predator densities?
 * What is the probability that either population falls below a quasi-extinction threshold?
@@ -246,11 +212,9 @@ Questions include:
 * Do the more biologically realistic deterministic models respond differently to stochastic forcing than classical Lotka–Volterra?
 * Can stochasticity destabilize dynamics that appear stable deterministically?
 
-A further extension will examine **correlated environmental noise**. Predator and prey populations occupying the same ecosystem may experience shared environmental shocks such as wildfire, drought, extreme temperature, or severe winters. Rather than assuming independent stochastic forcing, the model can introduce correlation
+A further extension will examine correlated environmental noise. Predator and prey populations occupying the same ecosystem may experience shared environmental shocks such as wildfire, drought, extreme temperature, or severe winters. So the model can introduce correlation
 
-$$
-\operatorname{Corr}(dW_U,dW_V)=\rho.
-$$
+$${Corr}(dW_U,dW_V)=\rho$$
 
 This allows investigation of questions such as:
 
@@ -277,35 +241,28 @@ This allows investigation of questions such as:
 
 ## 4. Stochastic Population Dynamics and Monte Carlo Analysis
 
-The final section brings the three case studies together. Rather than treating stochasticity as an additional biological mechanism, it asks how robust the deterministic conclusions are when biological systems are exposed to uncertainty and random environmental variation.
+The final section brings the three case studies together. We'll find out how robust the deterministic conclusions are when biological systems are exposed to uncertainty and random environmental variation.
 
-The general stochastic differential equation framework is
+The general stochastic differential equation is
 
-$$
-dX_t
-=
+$$dX_t = \mu(X_t,t)dt + g(X_t,t)dW_t$$
 
-\mu(X_t,t),dt
-+
-g(X_t,t),dW_t,
-$$
+where $$\mu$$ describes deterministic drift and (g) determines the magnitude and state dependence of stochastic forcing.
 
-where (\mu) describes deterministic drift and (g) determines the magnitude and state dependence of stochastic forcing.
-
-Discrete stochastic models will be used where biologically appropriate, particularly for the generational cicada system, while continuous-time stochastic differential equations can extend the yeast and predator–prey ODEs.
+Discrete stochastic models will be used where they make sense biologically,(Ex: the generational cicada system), while continuous-time stochastic differential equations can extend the yeast and predator–prey ODEs.
 
 ### Analysis
 
-The stochastic analysis will explicitly distinguish:
+The stochastic analysis will focus on:
 
-* **Parameter uncertainty:** uncertainty about the true value of a fixed biological parameter.
-* **Environmental stochasticity:** genuine temporal variation in environmental conditions.
-* **Demographic stochasticity:** random individual birth, death, and reproduction events, particularly important for small populations.
-* **Correlated environmental stochasticity:** shared environmental disturbances affecting multiple interacting populations.
+* *Parameter uncertainty:* uncertainty about the true value of a fixed biological parameter.
+* *Environmental stochasticity:* temporal variation in environmental conditions.
+* *Demographic stochasticity:* random individual birth, death, and reproduction events, particularly important for small populations.
+* *Correlated environmental stochasticity:* shared environmental disturbances affecting multiple interacting populations.
 
-Monte Carlo simulation will transform individual stochastic trajectories into distributions of biologically meaningful outcomes.
+I'll then use a Monte Carlo simulation to turn individual stochastic trajectories into distributions of outcomes.
 
-Summary statistics will include, where appropriate:
+Summary statistics will include (where they make sense):
 
 * Mean and median recovery time.
 * Recovery-time variance and quantiles.
@@ -336,7 +293,7 @@ The final analysis will use the three biological systems to compare how stochast
 * Are discrete-generation populations more sensitive to occasional extreme reproductive failures than continuous populations?
 * How strongly does initial population size affect stochastic recovery and extinction risk?
 * Do deterministic equilibria remain meaningful centers of behavior under stochastic forcing?
-* How does stochasticity alter conclusions based solely on deterministic recovery times?
+* How does stochasticity change conclusions based solely on deterministic recovery times?
 * How does coupling between species transmit environmental disturbances through an ecological system?
 * When environmental shocks are correlated, does interaction between populations amplify or mitigate joint risk?
 
@@ -349,6 +306,4 @@ The final analysis will use the three biological systems to compare how stochast
 5. Comparison of deterministic predictions with stochastic means, medians, and uncertainty intervals.
 6. Cross-model summary showing how stochastic sensitivity differs among yeast, cicada, and predator–prey systems.
 
-Together, these analyses turn the original deterministic coursework into a broader computational investigation of a central modeling question:
-
-> **When do simple deterministic population models provide reliable predictions, and when do nonlinear dynamics, numerical approximation, and stochastic variability fundamentally change the answer?**
+This hopefully be a much more thorough version of the original work!
