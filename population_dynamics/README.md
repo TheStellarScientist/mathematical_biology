@@ -1,9 +1,12 @@
 # Project One: Population Dynamics Plan
 
 >*Skills displayed here include:* **Stochastic differential equations, Monte Carlo simulation, nonlinear dynamical systems, numerical methods, uncertainty quantification, sensitivity analysis, correlated stochastic processes, first-passage/threshold analysis, parameter sweeps, model validation, scientific Python**
+>
 >I've decided to redo my coursework projects but expand them to cover any future work sections.
 >I got As on all of these but they are a bit simplisitic and if I want them in my portfolio I need to show off more of my skills. 
+>
 >This is Project One: Population Dynamics. I'm combining the first 2 projects from AMS 333: Mathematical Biology to make this as they flow together. 
+>
 >The original project reports are availble as well in the /originals directory. 
 
 We'll investigate how increasingly realistic biological assumptions change predicted population behavior, progressing from simple deterministic growth laws to nonlinear discrete maps, coupled predator–prey systems, and stochastic population models. My question is:
